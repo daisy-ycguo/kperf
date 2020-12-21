@@ -46,7 +46,7 @@ for name in {1..10};do kubectl create ns test-$name;done
 ### generate Knative Service deployment load
 ```shell script
 # Generate total 30 knative service, for each 15 seconds create 10 ksvc with 5 concurrency in namespace test-1, test-2
-# and test-33, and the ksvc names are ktest-0, ktest-1.....ktest-29.
+# and test-3, and the ksvc names are ktest-0, ktest-1.....ktest-29.
 $ kperf service generate -n 30 -b 10 -c 5 -i 15 --namespace-prefix test --namespace-range 1,3 --svc-prefix ktest --max-scale 1 --min-scale 1
 
 Creating ksvc ktest-0 in namespace test-1
@@ -57,8 +57,8 @@ Creating ksvc ktest-29 in namespace test-3
 ```
 
 ```shell script
-# Generate total 30 knative service, for each 15 seconds create 10 ksvc with 1 concurrency in namespace test1, test2 and
-# test3, and the ksvc names are ktest-0, ktest-2.....ktest-29. The generation will wait the previous generated service
+# Generate total 30 knative service, for each 15 seconds create 10 ksvc with 1 concurrency in namespace test-1, test-2 and
+# test-3, and the ksvc names are ktest-0, ktest-2.....ktest-29. The generation will wait the previous generated service
 # to be ready for most 10 seconds.
 $ kperf service generate -n 30 -b 10 -c 5 -i 15 --namespace-prefix test --namespace-range 1,3 --svc-prefix ktest --wait --timeout 10s --max-scale 1 --min-scale 1
 
@@ -80,7 +80,7 @@ Here is a figure of different resources generated for a Knative Service(assuming
 **Example 1 Measure Services (for eg. range 1,500)for load test under a specific namespace**
 
 ```shell script
-$ kperf service measure -n ktest-1 --svc-prefix ktest --range 101,110 --verbose
+$ kperf service measure --namespace ktest-1 --svc-prefix ktest --range 101,110 --verbose
 [Verbose] Service ktest-101: Service Configuration Ready Duration is 5s/5.000000s
 [Verbose] Service ktest-101: - Service Revision Ready Duration is 5s/5.000000s
 [Verbose] Service ktest-101:   - Service Deployment Created Duration is 2s/2.000000s
